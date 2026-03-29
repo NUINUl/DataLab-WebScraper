@@ -154,15 +154,18 @@ npm run dev
 
 The Dashboard will be accessible at `http://localhost:3000`.
 
+## ⚖️ Ethical Scraping & Robustness
+
+### Responsible Data Extraction
+DataLab is engineered to be a "Good Bot". It implements:
+- **Rate Limiting**: Integrated delays to avoid overwhelming target servers (Politeness Policy).
+- **User-Agent Rotation**: Mimics legitimate browser behavior to reduce 403/429 errors.
+
+### Error Handling & Resilience
+The BeautifulSoup engine features **Defensive Selection**. Instead of direct DOM mapping, it uses conditional checks to prevent crashes when website structures change (schema drift), ensuring the API always returns valid JSON even if elements are missing.
 ---
 <div align="center">
 
  *Developed by [NUINUI]*
-
-  _   _ _   _ ___ _   _ _   _ ___ 
- | \ | | | | |_ _| \ | | | | |_ _|
- |  \| | | | || ||  \| | | | || | 
- | |\  | |_| || || |\  | |_| || | 
- |_| \_|\___/|___|_| \_|\___/|___|
 
 </div>
