@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   DataLab — Design System Tokens (Tailwind CSS v4 native @theme)
+   ═══════════════════════════════════════════════════════════════ */
+@theme {
+  /* ── Typography ───────────────────────────────────────────── */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  /* ── Brand Palette (OKLCH) ────────────────────────────────── */
+
+  /* Background — Deep Charcoal / Void */
+  --color-void-950:      oklch(0.08 0.012 260);
+  --color-void-900:      oklch(0.11 0.015 260);
+  --color-void-800:      oklch(0.15 0.018 260);
+  --color-void-700:      oklch(0.20 0.020 260);
+
+  /* Scrapy Brand — Cobalt Electric */
+  --color-cobalt-400:    oklch(0.72 0.18 248);
+  --color-cobalt-500:    oklch(0.60 0.22 248);
+  --color-cobalt-600:    oklch(0.50 0.24 248);
+  --color-cobalt-glow:   oklch(0.60 0.22 248 / 0.35);
+
+  /* BS4 Brand — Emerald Neon */
+  --color-emerald-400:   oklch(0.76 0.17 162);
+  --color-emerald-500:   oklch(0.65 0.20 162);
+  --color-emerald-600:   oklch(0.54 0.22 162);
+  --color-emerald-glow:  oklch(0.65 0.20 162 / 0.35);
+
+  /* Glass / Surface */
+  --color-glass-border:  oklch(1 0 0 / 0.08);
+  --color-glass-bg:      oklch(1 0 0 / 0.04);
+  --color-glass-hover:   oklch(1 0 0 / 0.07);
+
+  /* JSON Panel — Syntax */
+  --color-json-key:      oklch(0.72 0.18 248);   /* cobalt */
+  --color-json-string:   oklch(0.76 0.17 162);   /* emerald */
+  --color-json-number:   oklch(0.80 0.16 55);    /* amber */
+  --color-json-bool:     oklch(0.75 0.18 0);     /* rose */
+  --color-json-null:     oklch(0.60 0.00 0);     /* muted */
+
+  /* ── Spacing / Radii ─────────────────────────────────────── */
+  --radius-glass:        1.5rem;   /* 24px */
+  --radius-chip:         999px;
+
+  /* ── Shadows ─────────────────────────────────────────────── */
+  --shadow-glass:
+    0 0 0 1px oklch(1 0 0 / 0.08),
+    0 8px 32px oklch(0 0 0 / 0.40),
+    0 2px 8px oklch(0 0 0 / 0.20);
+
+  --shadow-cobalt-glow:
+    0 0 24px oklch(0.60 0.22 248 / 0.50),
+    0 0 8px  oklch(0.60 0.22 248 / 0.30);
+
+  --shadow-emerald-glow:
+    0 0 24px oklch(0.65 0.20 162 / 0.50),
+    0 0 8px  oklch(0.65 0.20 162 / 0.30);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Global Resets & Base
+   ═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-void-950);
+  color: oklch(0.92 0.005 260);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Keyframe Animations
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes pulse-border-cobalt {
+  0%   { box-shadow: 0 0 0 0 oklch(0.60 0.22 248 / 0.60); }
+  70%  { box-shadow: 0 0 0 8px oklch(0.60 0.22 248 / 0.00); }
+  100% { box-shadow: 0 0 0 0 oklch(0.60 0.22 248 / 0.00); }
+}
+
+@keyframes pulse-border-emerald {
+  0%   { box-shadow: 0 0 0 0 oklch(0.65 0.20 162 / 0.60); }
+  70%  { box-shadow: 0 0 0 8px oklch(0.65 0.20 162 / 0.00); }
+  100% { box-shadow: 0 0 0 0 oklch(0.65 0.20 162 / 0.00); }
+}
+
+@keyframes sweep-cobalt {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes sweep-emerald {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Utility Classes
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Glass card surface */
+.glass-panel {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-glass);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Pulse effect classes (applied via JS) */
+.pulse-cobalt  { animation: pulse-border-cobalt  0.8s ease-out forwards; }
+.pulse-emerald { animation: pulse-border-emerald 0.8s ease-out forwards; }
+
+/* Scrollbar — minimal */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: oklch(1 0 0 / 0.12);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover { background: oklch(1 0 0 / 0.22); }
+
+/* JSON mono font */
+.font-json { font-family: var(--font-mono); }
+
+/* Blinking cursor */
+.cursor-blink::after {
+  content: "▌";
+  animation: blink-cursor 1s step-end infinite;
+  opacity: 0.7;
+}

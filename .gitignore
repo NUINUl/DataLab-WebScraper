@@ -1,0 +1,13 @@
+# Entornos y variables
+.venv/
+env/
+.env
+.env.local
+
+# Frontend
+node_modules/
+.next/
+
+# Python cache
+__pycache__/
+*.pyc
